@@ -32,13 +32,13 @@ export async function createSession(input: CreateSessionInput): Promise<{ token:
 
 export function setSessionCookie(res: Response, token: string, expiresAt: Date): void {
   res.cookie(env.SESSION_COOKIE_NAME, token, {
-    httpOnly: true,
-    secure: env.COOKIE_SECURE, // must be true in production (HTTPS)
-    sameSite: "lax",
-    domain: env.COOKIE_DOMAIN === "localhost" ? undefined : env.COOKIE_DOMAIN,
-    expires: expiresAt,
-    path: "/",
-  });
+  httpOnly: true,
+  secure: env.COOKIE_SECURE,
+  sameSite: env.NODE_ENV === "production" ? "none" : "lax",
+  domain: env.COOKIE_DOMAIN === "localhost" ? undefined : env.COOKIE_DOMAIN,
+  expires: expiresAt,
+  path: "/",
+});
 }
 
 export function clearSessionCookie(res: Response): void {
