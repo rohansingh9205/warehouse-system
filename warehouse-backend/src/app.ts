@@ -18,6 +18,7 @@ import integrationRoutes from "@/modules/integration/integration.routes";
 
 export function createApp(): Express {
   const app = express();
+  app.set("etag", false);
 
   // --- Security-hardening middleware (applied globally) ---
   app.use(helmet());

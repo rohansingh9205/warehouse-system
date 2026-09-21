@@ -223,7 +223,12 @@ export async function resetPassword(req: Request, res: Response, next: NextFunct
 
 export async function getCurrentUser(req: Request, res: Response, next: NextFunction) {
   try {
-    if (!req.currentUser) throw new AppError(401, "Authentication required.");
+    res.set("Cache-Control", "no-store");
+
+    if (!req.currentUser) {
+      throw new AppError(401, "Authentication required.");
+    }
+
     res.json({ user: req.currentUser });
   } catch (err) {
     next(err);
