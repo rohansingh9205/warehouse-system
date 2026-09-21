@@ -1,0 +1,8 @@
+{
+  "name": "@silk-warehouse/shared-types",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional shared TypeScript types for the warehouse system and its future integration consumers. Not required at runtime by warehouse-backend or warehouse-frontend — see index.ts for why.",
+  "main": "index.ts",
+  "types": "index.ts"
+}
