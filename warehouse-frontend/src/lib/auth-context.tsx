@@ -19,16 +19,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const refresh = useCallback(async () => {
-    try {
-      const data = await api.get<{ user: CurrentUser }>("/auth/me");
-      setUser(data.user);
-    } catch {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+const refresh = useCallback(async () => {
+  try {
+    const data = await api.get<{ user: CurrentUser }>("/auth/me");
+
+    console.log("AUTH /me SUCCESS:", data);
+    console.log("AUTH USER:", data.user);
+
+    setUser(data.user);
+  } catch (error) {
+    console.error("AUTH /me FAILED:", error);
+    setUser(null);
+  } finally {
+    setLoading(false);
+  }
+}, []);
 
   useEffect(() => {
     refresh();
