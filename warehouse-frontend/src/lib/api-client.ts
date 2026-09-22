@@ -15,9 +15,10 @@ export class ApiError extends Error {
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
-    ...options,
-    credentials: "include", // send the HTTP-only session cookie
-    headers: {
+  ...options,
+  credentials: "include",
+  cache: "no-store",
+  headers: {
       ...(options.body && !(options.body instanceof FormData) ? { "Content-Type": "application/json" } : {}),
       ...options.headers,
     },
